@@ -60,7 +60,11 @@ export const expectNoError = (msg: string | (() => void), fn?: () => void) => {
   try {
     fun();
   } catch (ex) {
-    assert.fail(appendToMessage(message, ex.message));
+    if (ex instanceof Error) {
+      assert.fail(appendToMessage(message, ex.message));
+    } else {
+      assert.fail(appendToMessage(message, "unknown error"));
+    }
   }
 };
 
