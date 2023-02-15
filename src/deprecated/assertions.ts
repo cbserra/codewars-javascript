@@ -105,7 +105,7 @@ export const assertNotApproxEquals = (
       " (rejected relative error: 1e-9)"
   );
   if (Math.abs(unexpected) <= 1) {
-    assert(Math.abs(unexpected - actual) > 1e-9, msg);
+    assert((Math.abs(unexpected - actual) > 1e-9) as boolean, msg as string);
   } else {
     assert(Math.abs((unexpected - actual) / unexpected) > 1e-9, msg);
   }

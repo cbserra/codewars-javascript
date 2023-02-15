@@ -5,9 +5,14 @@
     "target": "ES2019",
     "module": "commonjs",
     "outDir": "./lib",
-    "rootDir": "./src",
+    "rootDirs": ["src", "tests"],
     "declaration": true,
     "sourceMap": true,
-    "removeComments": true
-  }
+    "removeComments": true,
+    "skipLibCheck": true,
+
+    "types": ["node", "mocha", "chai"]
+  },
+  "exclude": ["node_modules", "lib", "tests", "src/deprecated"],
+  "include": ["src/*.ts", "test/*.test.ts"]
 }
