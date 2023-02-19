@@ -2,17 +2,17 @@
   "compilerOptions": {
     "strict": true,
     "esModuleInterop": true,
-    "target": "ES2019",
-    "module": "commonjs",
     "outDir": "./lib",
     "rootDirs": ["src", "tests"],
     "declaration": true,
     "sourceMap": true,
     "removeComments": true,
     "skipLibCheck": true,
-
-    "types": ["node", "mocha", "chai"]
+    "types": ["node", "mocha", "chai"],
+    "lib": ["ES2020"],
+    "module": "commonjs",
+    "target": "ES2020"
   },
   "exclude": ["node_modules", "lib", "tests", "src/deprecated"],
-  "include": ["src/*.ts", "test/*.test.ts"]
+  "include": ["src/*.ts", "test/*.spec.ts"]
 }

@@ -10,11 +10,14 @@
   "license": "MIT",
   "scripts": {
     "prepare": "tsc",
-    "tests": "mocha"
+    "tests": "mocha",
+    "lint:check": "prettier -c .",
+    "lint:fix": "prettier --write ."
   },
   "devDependencies": {
     "@types/chai": "^4.3.4",
     "@types/mocha": "^10.0.1",
+    "@types/node": "^18.13.0",
     "chai": "^4.3.7",
     "husky": "^4.2.5",
     "mocha": "^10.2.0",
@@ -32,7 +35,7 @@
     "require": [
       "ts-node/register"
     ],
-    "spec": "test/*.test.ts",
+    "spec": "test/*.spec.ts",
     "timeout": 10000
   }
 }
