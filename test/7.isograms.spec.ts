@@ -1,13 +1,11 @@
-// const chai = require("chai");
-// const assert = chai.assert;
+// See https://www.chaijs.com for how to use Chai.
+import { assert } from "chai";
 
-import { assert, config } from "chai";
-import { isIsogram } from "../src/isograms";
+import { isIsogram } from "../src/7.isograms";
 
-config.truncateThreshold = 0;
-
+// TODO Add your tests here
 describe("isogram tests", () => {
-  it("test", () => {
+  it("test", function () {
     assert.equal(isIsogram("Dermatoglyphics"), true);
     assert.equal(isIsogram("isogram"), true);
     assert.equal(isIsogram("aba"), false, "same chars may not be adjacent");
