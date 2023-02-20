@@ -1,7 +1,7 @@
 // See https://www.chaijs.com for how to use Chai.
 import { assert } from "chai";
 
-import { isIsogram } from "../src/7.isograms";
+import { isIsogram } from "../../../src/kyu/7/isograms";
 
 // TODO Add your tests here
 describe("isogram tests", () => {

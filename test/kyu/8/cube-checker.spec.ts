@@ -1,5 +1,5 @@
 import { assert } from "chai";
-import { cubeChecker } from "../src/8.cube-checker";
+import { cubeChecker } from "../../../src/kyu/8/cube-checker";
 
 describe("cube-checker", function () {
   it("Basic tests", function () {
