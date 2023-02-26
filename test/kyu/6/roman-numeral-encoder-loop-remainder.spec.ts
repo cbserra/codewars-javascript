@@ -1,7 +1,7 @@
 import { solution } from "../../../src/kyu/6/roman-numeral-encoder-loop-remainder";
 import { assert } from "chai";
 
-describe("roman-numeral-encoder-loop-remainder", function () {
+describe("roman-numeral-encoder-loop-remainder.refactor", function () {
   it("basic", function () {
     assert.strictEqual(solution(1000), "M");
     assert.strictEqual(solution(4), "IV");

@@ -12,184 +12,182 @@ const BASE_10_ROMAN_NUMERAL: NumberToString = {
   1000: "M",
 };
 
+const ROMAN_NUMERALS: string[] = [];
+
+/**
+ *
+ * @param number
+ * @returns
+ */
 export function solution(number: number): string | undefined {
-  console.log(`\n\n🚀 SOLUTION BEGIN ~ number:`, number);
+  console.log(`\n\n🚀 START LOOP ~ number:`, number);
   let mutableInput = number;
-  let result = "";
-  let remainder = 0;
+  // let result = "";
+  // let remainder = 0;
   // const dividedNumbers = number.split("");
 
-  do {
-    let leadingNumber = getLeadingNumber(mutableInput);
-    console.log(`🚀 ~ solution ~ leadingNumber`, leadingNumber);
+  // do {
+  const leadingNumber = getLeadingNumber(mutableInput);
+  console.log(`🚀 ~ solution ~ leadingNumber`, leadingNumber);
 
-    const numericPlace = getNumericPlace(mutableInput);
-    console.log(`🚀 ~ solution ~ numericPlace`, numericPlace);
+  const numericPlace = getNumericPlace(mutableInput);
+  console.log(`🚀 ~ solution ~ numericPlace`, numericPlace);
 
-    remainder = getRemainder(mutableInput, numericPlace);
-    console.log(`🚀 ~ solution ~ remainder`, remainder);
+  const remainder = getRemainder(mutableInput, numericPlace);
+  console.log(`🚀 ~ solution ~ remainder`, remainder);
 
-    const baseNumber = getBaseNumber(mutableInput, remainder);
-    console.log(`🚀 ~ solution ~ baseNumber`, baseNumber);
+  const baseNumber = getBaseNumber(mutableInput, remainder);
+  console.log(`🚀 ~ solution ~ baseNumber`, baseNumber);
 
-    // if (remainder > 0) {
+  // ROMAN_NUMERALS += getRomanNumeral(baseNumber, numericPlace);
+  // console.log(`🚀 ~ ROMAN_NUMERALS:`, ROMAN_NUMERALS);
 
-    // result += getRomanNumeral(mutableInput, numericPlace);
-    result += getRomanNumeral(baseNumber, numericPlace);
-    console.log(`🚀 ~ result:`, result);
-    mutableInput = remainder;
-    console.log(`🚀 ~ mutableInput:`, mutableInput);
-  } while (remainder > 0);
+  mutableInput = remainder;
+  console.log(`🚀 ~ mutableInput:`, mutableInput);
+  // } while (mutableInput > 0);
+  if (mutableInput > 0) {
+    console.log(`🚀 ~ mutableInput > 0`);
+    ROMAN_NUMERALS.push(getRomanNumeral(baseNumber, numericPlace));
+  }
 
-  return result;
+  // console.log(`🚀 ~ mutableInput <= 0`);
+  // return result;
+
+  console.log(`\n\n🚀 END LOOP ~ ROMAN_NUMERALS:`, ROMAN_NUMERALS);
+
+  return ROMAN_NUMERALS.join("");
 }
 
+/**
+ *
+ * @param leadingNumber
+ * @param remainder
+ * @returns
+ */
 function getBaseNumber(leadingNumber: number, remainder: number): number {
-  // console.log(`🚀 ~ getBaseNumber ~ leadingNumber - remainder;:`, leadingNumber - remainder)
   return leadingNumber - remainder;
 }
 
+/**
+ *
+ * @param wholeNumber
+ * @param leadingNumber
+ * @returns
+ */
 function getRemainder(wholeNumber: number, leadingNumber: number): number {
-  // console.log(`🚀 ~ getRemainder ~ wholeNumber % leadingNumber:`, wholeNumber % leadingNumber, )
-  // console.log(`🚀 ~ getRemainder ~ wholeNumber, leadingNumber, wholeNumber % leadingNumber:`, wholeNumber, leadingNumber, wholeNumber % leadingNumber)
   return wholeNumber % leadingNumber;
 }
 
 function getLeadingNumber(numerator: number): number {
-  // console.log(`🚀 ~ getLeadingNumber ~ numerator:`, numerator)
   const denominator = getDivisor(numerator);
-  // console.log(`🚀 ~ getLeadingNumber ~ denominator:`, denominator)
-
-  // console.log(`🚀 ~ getLeadingNumber ~ numerator / denominator:`, numerator / denominator)
-
   return Math.floor(numerator / denominator);
 }
 
+/**
+ *
+ * @param number
+ * @returns
+ */
 function getNumericPlace(number: number): number {
   const numericPlace = getBaseTenToNumber(number);
   return numericPlace;
 }
 
+/**
+ *
+ * @param number
+ * @returns
+ */
 function getBaseTenToNumber(number: number): number {
-  // console.log(`🚀 ~ getBaseTenToNumber ~ Math.pow(10, number.toString().length - 1):`, Math.pow(10, number.toString().length - 1))
   return Math.pow(10, number.toString().length - 1);
 }
 
+/**
+ *
+ * @param number
+ * @returns
+ */
 function getDivisor(number: number): number {
-  // console.log(`🚀 ~ number:`, number)
   return getBaseTenToNumber(number);
 }
 
-// function getDivisor(wholeNumber: number): number {
-//   console.log(`🚀 ~ getDivisor ~ wholeNumber`, wholeNumber);
-//   let divisor = 0;
-//   if (wholeNumber >= 1000) {
-//     divisor = 1_000;
-//     // console.log(`🚀 ~ getDivisor ~ divisor`, divisor)
-//   } else if (wholeNumber >= 500) {
-//     divisor = 500;
-//     // console.log(`🚀 ~ getDivisor ~ divisor`, divisor)
-//   } else if (wholeNumber >= 100) {
-//     divisor = 100;
-//     // console.log(`🚀 ~ getDivisor ~ 100`, 100)
-//   } else if (wholeNumber >= 50) {
-//     divisor = 50;
-//     // console.log(`🚀 ~ getDivisor ~ divisor`, divisor)
-//   } else if (wholeNumber >= 10) {
-//     divisor = 10;
-//     // console.log(`🚀 ~ getDivisor ~ divisor`, divisor)
-//   } else if (wholeNumber >= 5) {
-//     divisor = 5;
-//     // console.log(`🚀 ~ getDivisor ~ divisor`, divisor)
-//   } else if (wholeNumber >= 1) {
-//     divisor = 1;
-//     // console.log(`🚀 ~ getDivisor ~ divisor`, divisor)
-//   }
-
-//   console.log(`🚀 ~ getDivisor ~ divisor`, divisor);
-//   return divisor;
-// }
-
-function getRomanNumeral(
-  originalNumber: number,
-  leadingNumber: number
-): string {
-  console.log(`🚀 ~ getRomanNumeral ~ leadingNumber`, leadingNumber);
+/**
+ *
+ * @param originalNumber
+ * @param numericPlace
+ * @returns
+ */
+function getRomanNumeral(originalNumber: number, numericPlace: number): string {
+  console.log(`🚀 ~ getRomanNumeral ~ numericPlace`, numericPlace);
   console.log(`🚀 ~ getRomanNumeral ~ originalNumber`, originalNumber);
 
-  let result = "";
+  const romanNumeral = checkForLessThanPlace(originalNumber, numericPlace);
+  console.log(`🚀 ~ getRomanNumeral ~ result`, romanNumeral);
 
-  // for (let i = 0; i < leadingNumber; i++) {
-  // result += BASE_10_ROMAN_NUMERAL[originalNumber]
-  result = checkForLessThanPlace(originalNumber, leadingNumber);
-  console.log(`🚀 ~ getRomanNumeral ~ result`, result);
-  // }
-  // result += BASE_10_ROMAN_NUMERAL[originalNumber / 1000]
-
-  // console.log(`🚀 ~ getRomanNumeral ~ leadingNumber`, leadingNumber)
-  // return BASE_10_ROMAN_NUMERAL[leadingNumber]
-  return result;
+  return romanNumeral;
 }
 
-function checkForLessThanPlace(number: number, place: number): string {
-  // console.log(`🚀 ~ checkForLessThanPlace ~ place`, place)
-  // console.log(`🚀 ~ checkForLessThanPlace ~ number`, number)
-  // if (number === 4 || number === 9) {
-  //   console.log(`🚀 ~ checkForLessThanPlace ~ BASE_10_ROMAN_NUMERAL[place] + BASE_10_ROMAN_NUMERAL[place * 10]`, BASE_10_ROMAN_NUMERAL[place] + BASE_10_ROMAN_NUMERAL[place * 10])
-  //   return BASE_10_ROMAN_NUMERAL[place] + BASE_10_ROMAN_NUMERAL[place * 10]
-  // } else if (number >= 5) {
-  //   console.log(`🚀 ~ checkForLessThanPlace ~ BASE_10_ROMAN_NUMERAL[place * 5] + BASE_10_ROMAN_NUMERAL[place].repeat(number - 5)`, BASE_10_ROMAN_NUMERAL[place * 5] + BASE_10_ROMAN_NUMERAL[place].repeat(number - 5))
-  //   return BASE_10_ROMAN_NUMERAL[place * 5] + BASE_10_ROMAN_NUMERAL[place].repeat(number - 5)
-  // }
-
-  // console.log(`🚀 ~ checkForLessThanPlace ~ BASE_10_ROMAN_NUMERAL[place].repeat(number)`, BASE_10_ROMAN_NUMERAL[place].repeat(number))
-  // return BASE_10_ROMAN_NUMERAL[place].repeat(number)
-
-  console.log(`🚀 ~ checkForLessThanPlace ~ place`, place);
+/**
+ *
+ * @param number
+ * @param numericPlace
+ * @returns
+ */
+function checkForLessThanPlace(number: number, numericPlace: number): string {
+  console.log(`🚀 ~ checkForLessThanPlace ~ numericPlace`, numericPlace);
   console.log(`🚀 ~ checkForLessThanPlace ~ number`, number);
   if (
-    ((number === 4 || number === 9) && place === 1) ||
-    ((number === 40 || number === 90) && place === 10) ||
-    ((number === 400 || number === 900) && place === 100)
+    ((number === 4 || number === 9) && numericPlace === 1) ||
+    ((number === 40 || number === 90) && numericPlace === 10) ||
+    ((number === 400 || number === 900) && numericPlace === 100)
   ) {
     console.log(
-      `🚀 ~ checkForLessThanPlace ~ if ~ BASE_10_ROMAN_NUMERAL[${place}] + BASE_10_ROMAN_NUMERAL[${
-        place + number
-      }]`,
-      BASE_10_ROMAN_NUMERAL[place] + BASE_10_ROMAN_NUMERAL[place + number]
+      `🚀 ~ checkForLessThanPlace ~ if 4's and 9's ~ (BASE_10_ROMAN_NUMERAL[${numericPlace}] + BASE_10_ROMAN_NUMERAL[${
+        numericPlace + number
+      }]) = `,
+      BASE_10_ROMAN_NUMERAL[numericPlace] +
+        BASE_10_ROMAN_NUMERAL[numericPlace + number]
     );
-    return BASE_10_ROMAN_NUMERAL[place] + BASE_10_ROMAN_NUMERAL[place + number];
+    return (
+      BASE_10_ROMAN_NUMERAL[numericPlace] +
+      BASE_10_ROMAN_NUMERAL[numericPlace + number]
+    );
     // } else if (number >= 5) {
     //   console.log(`🚀 ~ checkForLessThanPlace ~ BASE_10_ROMAN_NUMERAL[place * 5] + BASE_10_ROMAN_NUMERAL[place].repeat(number - 5)`, BASE_10_ROMAN_NUMERAL[place * 5] + BASE_10_ROMAN_NUMERAL[place].repeat(number - 5))
     //   return BASE_10_ROMAN_NUMERAL[place * 5] + BASE_10_ROMAN_NUMERAL[place].repeat(number - 5)
-  } else if (number >= 5 && number < 9 && place === 1) {
+  } else if (number >= 5 && number < 9 && numericPlace === 1) {
     console.log(
-      `🚀 ~ checkForLessThanPlace ~ else if ~ BASE_10_ROMAN_NUMERAL[${
-        place * 5
-      }] + BASE_10_ROMAN_NUMERAL[${place}].repeat(${number} - 5)`,
-      BASE_10_ROMAN_NUMERAL[place * 5] +
-        BASE_10_ROMAN_NUMERAL[place].repeat(number - 5)
+      `🚀 ~ checkForLessThanPlace ~ else if 5 > 9 ~ BASE_10_ROMAN_NUMERAL[${
+        numericPlace * 5
+      }] + BASE_10_ROMAN_NUMERAL[${numericPlace}].repeat(${number} - 5)`,
+      BASE_10_ROMAN_NUMERAL[numericPlace * 5] +
+        multiplyRomanNumerals(BASE_10_ROMAN_NUMERAL[numericPlace], number - 5)
     );
 
-    return (
-      BASE_10_ROMAN_NUMERAL[place * 5] +
-      BASE_10_ROMAN_NUMERAL[place].repeat(number - 5)
+    const placeTimesFiveNumeral = BASE_10_ROMAN_NUMERAL[numericPlace * 5];
+    console.log(
+      `🚀 ~ checkForLessThanPlace ~ placeTimesFiveNumeral:`,
+      placeTimesFiveNumeral
     );
-    // } else if (place > 1) {
-    //   console.log(
-    //     `🚀 ~ checkForLessThanPlace ~ else if ~ BASE_10_ROMAN_NUMERAL[${place}].repeat(${number})`,
-    //     BASE_10_ROMAN_NUMERAL[place].repeat(number)
-    //   );
+    const numberMinusFive = multiplyRomanNumerals(
+      BASE_10_ROMAN_NUMERAL[numericPlace],
+      number - 5
+    );
+    console.log(
+      `🚀 ~ checkForLessThanPlace ~ numberMinusFive:`,
+      numberMinusFive
+    );
 
-    //   return BASE_10_ROMAN_NUMERAL[place].repeat(number);
+    return placeTimesFiveNumeral + numberMinusFive;
   }
-
-  // console.log(`🚀 ~ checkForLessThanPlace ~ BASE_10_ROMAN_NUMERAL[place].repeat(number)`, BASE_10_ROMAN_NUMERAL[place].repeat(number))
-  // return BASE_10_ROMAN_NUMERAL[number].repeat(number)
   console.log(
-    `🚀 ~ checkForLessThanPlace ~ else ~ BASE_10_ROMAN_NUMERAL[${place}]`,
-    BASE_10_ROMAN_NUMERAL[place]
+    `🚀 ~ checkForLessThanPlace ~ else ~ BASE_10_ROMAN_NUMERAL[${numericPlace}]`,
+    BASE_10_ROMAN_NUMERAL[numericPlace]
   );
 
-  return BASE_10_ROMAN_NUMERAL[place];
+  return BASE_10_ROMAN_NUMERAL[numericPlace];
+}
+
+function multiplyRomanNumerals(romanNumeral: string, multiplier: number) {
+  return romanNumeral.repeat(multiplier);
 }

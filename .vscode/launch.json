@@ -11,7 +11,7 @@
         "--timeout",
         "999999",
         "--colors",
-        "${workspaceFolder}/test/isograms.spec.ts"
+        "${workspaceFolder}/test/**/isograms.spec.ts"
       ],
       "internalConsoleOptions": "openOnSessionStart",
       "name": "Isogram Tests",
@@ -27,7 +27,7 @@
         "--timeout",
         "999999",
         "--colors",
-        "${workspaceFolder}/test/*.spec.ts"
+        "${workspaceFolder}/test/**/*.spec.ts"
       ],
       "internalConsoleOptions": "openOnSessionStart",
       "name": "All Mocha Tests",
@@ -43,10 +43,26 @@
         "--timeout",
         "999999",
         "--colors",
-        "${workspaceFolder}/test/roman-numeral-encoder.spec.ts"
+        "${workspaceFolder}/test/**/**/roman-numeral-encoder*.spec.ts"
       ],
       "internalConsoleOptions": "openOnSessionStart",
       "name": "Roman Numeral Encoder Tests",
+      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      "request": "launch",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node"
+    },
+    {
+      "args": [
+        "-u",
+        "tdd",
+        "--timeout",
+        "999999",
+        "--colors",
+        "${workspaceFolder}/test/**/**/cube-checker.spec.ts"
+      ],
+      "internalConsoleOptions": "openOnSessionStart",
+      "name": "Cube Checker Tests",
       "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
       "request": "launch",
       "skipFiles": ["<node_internals>/**"],

@@ -1,4 +1,4 @@
-import { solution } from "../../../src/kyu/6/roman-numeral-encoder copy";
+import { solution } from "../../../src/kyu/6/roman-numeral-encoder.remainder";
 import { assert } from "chai";
 
 describe("roman-numeral-encoder copy", function () {
