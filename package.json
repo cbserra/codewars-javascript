@@ -18,7 +18,11 @@
     "@types/chai": "^4.3.4",
     "@types/mocha": "^10.0.1",
     "@types/node": "^18.13.0",
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@typescript-eslint/parser": "^5.52.0",
     "chai": "^4.3.7",
+    "eslint": "^8.34.0",
+    "eslint-config-prettier": "^8.6.0",
     "husky": "^4.2.5",
     "mocha": "^10.2.0",
     "prettier": "^2.0.5",
@@ -35,7 +39,10 @@
     "require": [
       "ts-node/register"
     ],
-    "spec": "test/*.spec.ts",
+    "spec": "test/**/*.spec.ts",
     "timeout": 10000
+  },
+  "dependencies": {
+    "tslint": "^6.1.3"
   }
 }
