@@ -3,12 +3,10 @@ const EVEN_OUTLIER = 0;
 
 export function findOutlier(integers: number[]): number {
   const evenOutliers = integers.filter(isEvenOutlier);
-  const outlier =
-    evenOutliers.length === 1
-      ? evenOutliers[0]
-      : integers.filter(isOddOutlier)[0];
 
-  return outlier;
+  return evenOutliers.length === 1
+    ? evenOutliers[0]
+    : integers.filter(isOddOutlier)[0];
 }
 
 function isEvenOutlier(integer: number): boolean {
