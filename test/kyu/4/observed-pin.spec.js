@@ -1,18 +1,14 @@
-import { assert, config } from "chai";
-import { getPINs } from "../src/observed-pin";
-
-type PinExpectations = {
-  [key: string]: string[];
-};
-const SINGLE_DIGIT_PIN_DATA: PinExpectations = {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const chai_1 = require("chai");
+const observed_pin_1 = require("../../../src/kyu/4/observed-pin");
+const SINGLE_DIGIT_PIN_DATA = {
   "8": ["5", "7", "8", "9", "0"],
 };
-
-const DOUBLE_DIGIT_PIN_DATA: PinExpectations = {
+const DOUBLE_DIGIT_PIN_DATA = {
   "11": ["11", "22", "44", "12", "21", "14", "41", "24", "42"],
 };
-
-const TRIPLE_DIGIT_PIN_DATA: PinExpectations = {
+const TRIPLE_DIGIT_PIN_DATA = {
   "369": [
     "339",
     "366",
@@ -52,29 +48,21 @@ const TRIPLE_DIGIT_PIN_DATA: PinExpectations = {
     "239",
   ],
 };
-
 describe("observed-pin tests - single-digit", function () {
   assertSamePins("tests an observed single-digit pin", SINGLE_DIGIT_PIN_DATA);
 });
-
 describe("observed-pin tests - double-digit", function () {
   assertSamePins("tests a double-digit pin test", DOUBLE_DIGIT_PIN_DATA);
 });
-
 describe("observed-pin tests - triple-digit", function () {
   assertSamePins("tests a triple-digit pin test", TRIPLE_DIGIT_PIN_DATA);
 });
-
 // config.truncateThreshold = 0;
-
-function assertSamePins(
-  testSubject: string,
-  observedToPins: PinExpectations
-): void {
+function assertSamePins(testSubject, observedToPins) {
   const observedPin = Object.keys(observedToPins)[0];
-  const actualPins = getPINs(observedPin);
+  const actualPins = (0, observed_pin_1.getPINs)(observedPin);
   const expectedPins = Object.values(observedToPins)[0];
   it(`${testSubject}: '${observedPin}'`, () => {
-    assert.sameMembers(actualPins, expectedPins);
+    chai_1.assert.sameMembers(actualPins, expectedPins);
   });
 }

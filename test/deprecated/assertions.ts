@@ -1,6 +1,5 @@
 // Assertions aliased to names from the custom test framework.
-import chai from "chai";
-const assert = chai.assert;
+import { assert } from "chai";
 
 // Disable truncating actual and expected in assertion errors.
 chai.config.truncateThreshold = 0;

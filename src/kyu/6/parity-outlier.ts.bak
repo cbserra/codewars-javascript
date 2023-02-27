@@ -1,0 +1,47 @@
+const ODD_OUTLIER = 1;
+const EVEN_OUTLIER = 0;
+
+// export function findOutlier(integers: number[]): number {
+//   const evenOutliers = integers.filter(findEvenOutlier);
+//   const oddOutliers = integers.filter(findOddOutlier);
+//   console.debug(`integers = ${integers}, evenOutliers = ${evenOutliers}, oddOutliers = ${oddOutliers}`)
+  
+//   return evenOutliers.length === 1 ? evenOutliers[0] : oddOutliers[0];
+//   return evenOutliers.length === 1 ? evenOutliers[0] : integers.filter(findOddOutlier)[0];
+// }
+
+export function findOutlier(integers: number[]): number {
+  const earlySum = integers.slice(0, 3).reduce((a, b) => a + b);
+  const evenResult = isResultEven(earlySum)
+  const outlier = evenResult ? findFirstOutlierByParam(integers, EVEN_OUTLIER) : findFirstOutlierByParam(integers, ODD_OUTLIER);
+  console.debug(`integers = ${integers}, earlySum = ${earlySum}, evenResult = ${evenResult}, outlier = ${outlier}`)
+            
+  return outlier
+}
+          
+          
+function isResultEven(modOp: number): boolean {
+  return findOutlierByParam(modOp, EVEN_OUTLIER)
+}
+      
+  // function isOddOutlier(integer: number): boolean {
+  //   return findOutlierByParam(integer, ODD_OUTLIER)
+  // }
+  
+
+
+
+  
+function findFirstOutlierByParam(integers: number[], result: number): number {
+  return integers.find((integer, result) => findOutlierByParam(integer, result)) || -1
+}
+
+function findOutlierByParam(integer: number, result: number): boolean {
+  return getAbsoluteResultOfMod(integer) === result
+}
+
+function getAbsoluteResultOfMod(integer: number): number {
+  return Math.abs(integer % 2)
+}
+
+// return evenValues[0]

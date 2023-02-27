@@ -1,4 +1,4 @@
-import { greet } from "../../../src/hello-world";
+import { greet } from "../../../src/kyu/8/hello-world";
 
 const assert = require("chai").assert;
 

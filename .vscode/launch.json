@@ -11,10 +11,10 @@
         "--timeout",
         "999999",
         "--colors",
-        "${workspaceFolder}/test/**/isograms.spec.ts"
+        "${workspaceFolder}/test/**/*.spec.ts"
       ],
       "internalConsoleOptions": "openOnSessionStart",
-      "name": "Isogram Tests",
+      "name": "All Mocha Tests",
       "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
       "request": "launch",
       "skipFiles": ["<node_internals>/**"],
@@ -27,10 +27,10 @@
         "--timeout",
         "999999",
         "--colors",
-        "${workspaceFolder}/test/**/*.spec.ts"
+        "${workspaceFolder}/test/**/isograms.spec.ts"
       ],
       "internalConsoleOptions": "openOnSessionStart",
-      "name": "All Mocha Tests",
+      "name": "Isogram Tests",
       "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
       "request": "launch",
       "skipFiles": ["<node_internals>/**"],
@@ -63,6 +63,22 @@
       ],
       "internalConsoleOptions": "openOnSessionStart",
       "name": "Cube Checker Tests",
+      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      "request": "launch",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node"
+    },
+    {
+      "args": [
+        "-u",
+        "tdd",
+        "--timeout",
+        "999999",
+        "--colors",
+        "${workspaceFolder}/test/**/**/parity-outlier.spec.ts"
+      ],
+      "internalConsoleOptions": "openOnSessionStart",
+      "name": "Parity Outlier Simple Tests",
       "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
       "request": "launch",
       "skipFiles": ["<node_internals>/**"],

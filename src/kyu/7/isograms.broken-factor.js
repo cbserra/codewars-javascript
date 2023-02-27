@@ -1,19 +1,15 @@
-type IsogramCount = {
-  [key: string]: number;
-};
-
-function hasDuplicates(value: number, index: number, array: string[]): boolean {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.isIsogram = void 0;
+function hasDuplicates(value, index, array) {
   return new Set(array).size !== array.length;
 }
-
-export function isIsogram(str: string): boolean {
+function isIsogram(str) {
   console.log(`🚀 ~ isIsogram ~ str`, str);
   if (str === undefined || str.length == 0) {
     return true;
   }
-
-  const count: IsogramCount = {};
-
+  const count = {};
   const foundIsogram = str
     .toLowerCase()
     .split("")
@@ -27,15 +23,12 @@ export function isIsogram(str: string): boolean {
       console.log(`🚀 ~ idx`, idx);
       console.log(`🚀 ~ curr`, curr);
       console.log(`🚀 ~ arr[${idx - 1}]`, arr[idx - 1]);
-
       return !(curr === arr[idx + 1] && idx < arr.length - 1);
     });
-
   //   count[curr] = count[curr] ? count[curr] + 1 : 1;
   //   console.log(
   //     `find, count[${curr}] = ${count[curr]}, curr = ${curr}, idx = ${idx}, arr = ${arr}`
   //   );
-
   //   if (count[curr] > 1) {
   //     foundIsogram = false;
   //   }
@@ -48,11 +41,10 @@ export function isIsogram(str: string): boolean {
   //     console.log(
   //       `forEach, count[${curr}] = ${count[curr]}, curr = ${curr}, idx = ${idx}, arr = ${arr}`
   //     );
-
   //     if (count[curr] > 1) {
   //       foundIsogram = false;
   //     }
   //   });
-
   return foundIsogram;
 }
+exports.isIsogram = isIsogram;
