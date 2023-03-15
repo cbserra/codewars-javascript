@@ -6,7 +6,7 @@ module.exports = {
   },
   extends: ["prettier"],
   ignorePatterns: [
-    "test/**/*.spec.ts",
+    "test/k**/*.spec.ts",
     // "lib/*",
     "node_modules/**",
     // "diagrams/**",
@@ -23,7 +23,7 @@ module.exports = {
   outDir: "./lib",
   rootDirs: ["src", "tests"],
   exclude: ["node_modules", "lib", "src/deprecated"],
-  include: ["src/**/*.ts", "test/**/*.spec.ts"],
+  // include: ["src/**/*.ts", "test/**/*.spec.ts"],
   skipLibCheck: true,
   types: ["node", "mocha", "chai"],
 };

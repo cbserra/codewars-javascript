@@ -9,11 +9,13 @@
   "repository": "https://github.com/codewars/javascript-test-compat",
   "license": "MIT",
   "scripts": {
+    "install": "yarn install",
     "clean": "rimraf lib",
     "prepare": "tsc",
     "tests": "mocha",
     "lint:check": "prettier -c .",
-    "lint:fix": "prettier --write ."
+    "lint:fix": "prettier --write .",
+    "watch": "tsc -w"
   },
   "devDependencies": {
     "@types/chai": "^4.3.4",
@@ -40,7 +42,7 @@
     "require": [
       "ts-node/register"
     ],
-    "spec": "test/**/*.spec.ts",
+    "spec": "test/kyu/**/*.spec.ts",
     "timeout": 10000
   },
   "dependencies": {

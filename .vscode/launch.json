@@ -83,6 +83,38 @@
       "request": "launch",
       "skipFiles": ["<node_internals>/**"],
       "type": "node"
+    },
+    {
+      "args": [
+        "-u",
+        "tdd",
+        "--timeout",
+        "999999",
+        "--colors",
+        "${workspaceFolder}/test/kyu/4/*.spec.ts"
+      ],
+      "internalConsoleOptions": "openOnSessionStart",
+      "name": "Kyu 4 Tests",
+      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      "request": "launch",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node"
+    },
+    {
+      "args": [
+        "-u",
+        "tdd",
+        "--timeout",
+        "999999",
+        "--colors",
+        "${workspaceFolder}/test/kyu/5/*.spec.ts"
+      ],
+      "internalConsoleOptions": "openOnSessionStart",
+      "name": "Kyu 5 Tests",
+      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      "request": "launch",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node"
     }
   ]
 }
