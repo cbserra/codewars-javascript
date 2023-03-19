@@ -1,120 +1,138 @@
-const ALPHA_LOWER: string[] = "abcdefghijklmnopqrstuvwxyz".split("");
-const ALPHA_UPPER: string[] = ALPHA_LOWER.map((s: string) => s.toUpperCase());
-const DIGITS: string[] = "0123456789".split("");
-const SPECIAL_CHARS: string[] = ".,:;-?! '()$%&\"".split("");
+const ALPHA_LOWER: string[] = 'abcdefghijklmnopqrstuvwxyz'.split('')
+const ALPHA_UPPER: string[] = ALPHA_LOWER.map((s: string) => s.toUpperCase())
+const DIGITS: string[] = '0123456789'.split('')
+const SPECIAL_CHARS: string[] = '.,:;-?! \'()$%&"'.split('')
 
-const REGION_CHARS: string[] = ALPHA_UPPER.concat(ALPHA_LOWER)
-  .concat(DIGITS)
-  .concat(SPECIAL_CHARS);
+const REGION_CHARS: string[] = ALPHA_UPPER.concat(ALPHA_LOWER).concat(DIGITS).concat(SPECIAL_CHARS)
 
-// function validate(invalidChars: string[]): {error?: string} {
-//   if (invalidChars.length > 0) return {error:'Invalid characters: ' + invalidChars.join(', ')};
-//   return {};
-// }
+export function encrypt(text: string): string {
+  // STEP 0: Validate input
+  if (isEmptyInput(text)) {
+    console.error(`🚀 ~ encrypt ~ empty input found -- returning '${text}'`)
+    return text
+  }
+  validateCharacters(text)
+
+  // STEP 1: Inverse the casing of every other character
+  const modifiedCasing: string = inverseEveryOtherCasing(text)
+  console.log(`🚀 ~ encrypt ~ STEP 1: '${modifiedCasing}'`)
+
+  // STEP 2: Replace each character with the character 77 places after it in the region
+  const encryptedText: string[] = encryptInverseCasedText(modifiedCasing)
+  console.log(`🚀 ~ encrypt ~ STEP 2: '${encryptedText.join('')}'`)
+
+  // STEP 3: Replace first character with original first character's region index subtracted from end of Region Characters
+  const encryptedTextWithReplacedFirstChar = replaceFirstChar(encryptedText, modifiedCasing)
+  console.log(`🚀 ~ encrypt ~ STEP 3: '${encryptedTextWithReplacedFirstChar}'`)
+
+  return encryptedTextWithReplacedFirstChar
+}
 
 function isEmptyInput(input: string): boolean {
-  return input === undefined || input === null || input.length === 0;
+  return input === undefined || input === null || input.length === 0
 }
 function filterInvalidCharacters(text: string): string[] {
-  return text.split("").filter((s: string) => !REGION_CHARS.includes(s));
+  return text.split('').filter((s: string) => !REGION_CHARS.includes(s))
 }
 function containsInvalidCharacters(chars: string[]): boolean {
-  return chars.length > 0;
+  return chars.length > 0
 }
 function inverseEveryOtherCasing(text: string): string {
   return text
-    .split("")
+    .split('')
     .map((s: string, i: number) => {
-      return i > 0 && i % 2 !== 0
-        ? s === s.toUpperCase()
-          ? s.toLowerCase()
-          : s.toUpperCase()
-        : s;
+      return i > 0 && i % 2 !== 0 ? (s === s.toUpperCase() ? s.toLowerCase() : s.toUpperCase()) : s
     })
-    .join("");
+    .join('')
 }
+function getConsecutiveCharDifference(modifiedCasing: string, firstIndex: number) {
+  const char1 = modifiedCasing.charAt(firstIndex)
+  const unmodChar1Index = REGION_CHARS.indexOf(char1)
+  const char2 = modifiedCasing.charAt(firstIndex + 1)
+  const unmodChar2Index = REGION_CHARS.indexOf(char2)
+  const difference = unmodChar1Index - unmodChar2Index
 
-function getConsecutiveCharDifference(
-  modifiedCasing: string,
-  firstIndex: number
-) {
-  const char1 = modifiedCasing.charAt(firstIndex);
-  const unmodChar1Index = REGION_CHARS.indexOf(char1);
-  const char2 = modifiedCasing.charAt(firstIndex + 1);
-  const unmodChar2Index = REGION_CHARS.indexOf(char2);
-  const difference = unmodChar1Index - unmodChar2Index;
-
-  return difference;
+  return difference
 }
-
-export function encrypt(text: string): string | Error {
-  // console.log(`🚀 ~ encrypt ~ text:`, text)
-  if (isEmptyInput(text)) {
-    return text;
-  }
-
-  const invalidChars = filterInvalidCharacters(text);
-  console.log(`🚀 ~ encrypt ~ invalidChars:`, invalidChars);
-  // validate(invalidChars);
-  if (containsInvalidCharacters(invalidChars)) {
-    // console.log(`🚀 ~ encrypt ~ invalidChars.length: should throw an error`, invalidChars.length)
-
-    return new Error(
-      "text contains invalid characters: " + invalidChars.join(", ")
-    );
-  }
-
-  // STEP 1: Inverse the casing of every other character
-  const modifiedCasing: string = inverseEveryOtherCasing(text);
-  console.log(`🚀 ~ modifiedCasing ~ STEP 1: '${modifiedCasing}'`);
-  // console.log(`🚀 ~ modifiedCasing:`, modifiedCasing)
-
-  // STEP 2: Replace each character with the character 77 places after it in the region
-  const encryptedText: string[] = [];
+function encryptInverseCasedText(modifiedCasing: string): string[] {
+  const encryptedText: string[] = []
   for (let i = 0; i < modifiedCasing.length - 1; i++) {
-    const difference = getConsecutiveCharDifference(modifiedCasing, i);
+    const difference = getConsecutiveCharDifference(modifiedCasing, i)
 
-    // const replacementRegionIndex = difference + 77;
-    // const replacementRegionChar = REGION_CHARS[replacementRegionIndex];
-    const replacementRegionChar =
-      REGION_CHARS[difference > 0 ? difference : difference + 77];
-    encryptedText.push(replacementRegionChar);
+    const replacementRegionCharIndex = difference >= 0 ? difference : difference + 77
+    const replacementRegionChar = REGION_CHARS[replacementRegionCharIndex]
+
+    encryptedText.push(replacementRegionChar)
   }
-  console.log(
-    `🚀 ~ encrypt ~ encryptedText ~ STEP 2:'${encryptedText
-      .map((s: string) => s)
-      .join("")}'`
-  );
 
-  // STEP 3: Replace first character with original first character's region index subtracted from end of Region Characters
-  const firstCharIndexInRegion = REGION_CHARS.indexOf(modifiedCasing[0]);
-  const firstCharRegionReplacement =
-    REGION_CHARS[REGION_CHARS.length - 1 - firstCharIndexInRegion];
-  encryptedText.unshift(firstCharRegionReplacement);
-  console.log(
-    `🚀 ~ encrypt ~ encryptedText ~ STEP 3:'${encryptedText
-      .map((s: string) => s)
-      .join("")}'`
-  );
+  return encryptedText
+}
+function replaceFirstChar(encryptedText: string[], modifiedCasing: string) {
+  const firstCharIndexInRegion = REGION_CHARS.indexOf(modifiedCasing[0])
+  const firstCharRegionReplacement = REGION_CHARS[REGION_CHARS.length - 1 - firstCharIndexInRegion]
+  encryptedText.unshift(firstCharRegionReplacement)
 
-  return encryptedText.join("");
+  return encryptedText.join('')
+}
+function validateCharacters(text: string): void {
+  const invalidChars = filterInvalidCharacters(text)
+  if (containsInvalidCharacters(invalidChars)) {
+    console.error(`🚀 ~ validateCharacters ~ invalidChars found -- throw new Error()`)
+    throw new Error(`Invalid characters found: ${invalidChars.join(', ')}`)
+  }
 }
 
 export function decrypt(encryptedText: string): string {
-  const remainingEncryptedText = encryptedText.split("");
-  const decryptedText: string[] = [];
+  // STEP 0: Validate input
+  if (isEmptyInput(encryptedText)) {
+    console.error(`🚀 ~ decrypt ~ empty input found -- returning '${encryptedText}'`)
+    return encryptedText
+  }
+  validateCharacters(encryptedText)
 
-  const firstChar = remainingEncryptedText.shift() || "";
-  const regionIndex = REGION_CHARS.indexOf(firstChar);
-  const originalFirstChar = REGION_CHARS[REGION_CHARS.length - 1 - regionIndex];
+  const remainingEncryptedText = encryptedText.split('')
 
-  decryptedText.push(originalFirstChar);
+  // STEP 1: Replace first character with original first character's region index subtracted from end of Region Characters
+  const decryptedFirstChar: string = decryptFirstChar(remainingEncryptedText[0])
+  console.log(`🚀 ~ decrypt ~ STEP 1: '${decryptedFirstChar}'`)
 
-  console.log(
-    `firstChar = '${firstChar}', regionIndex = '${regionIndex}', originalFirstChar = '${originalFirstChar}', remainingEncryptedText = '${remainingEncryptedText}'`
-  );
+  // STEP 2: Replace each character with the character 77 places after it, if the difference is negative, or or use the difference if the difference is positive
+  // This will return the "every other character" modified casing text
+  const decryptedModifiedCasingText = decryptToModifiedCasing(
+    remainingEncryptedText.slice(1),
+    decryptedFirstChar
+  )
+  console.log(`🚀 ~ decrypt ~ STEP 2: '${decryptedModifiedCasingText}'`)
 
-  console.log(remainingEncryptedText.join(""));
+  // STEP 3: Inverse the casing of every other character
+  const decryptedText = inverseEveryOtherCasing(decryptedModifiedCasingText.join(''))
+  console.log(`🚀 ~ decrypt ~ STEP 3: '${decryptedText}'`)
 
-  return decryptedText.join("");
+  return decryptedText
+}
+
+function decryptToModifiedCasing(
+  remainingEncryptedText: string[],
+  decryptedFirstChar: string
+): string[] {
+  const decryptedModifiedCasingText: string[] = [decryptedFirstChar]
+  for (let i = 0; i < remainingEncryptedText.length; i++) {
+    const replacementRegionChar = remainingEncryptedText[i]
+    const replacementRegionCharIndex = REGION_CHARS.indexOf(replacementRegionChar)
+    const previouslyDecryptedCharIndex = REGION_CHARS.indexOf(decryptedModifiedCasingText[i])
+
+    const diff = previouslyDecryptedCharIndex - replacementRegionCharIndex
+    const updatedDiff = diff >= 0 ? diff : diff + 77
+
+    const originalDecryptedModifiedCasingChar = REGION_CHARS[updatedDiff]
+    decryptedModifiedCasingText.push(originalDecryptedModifiedCasingChar)
+  }
+
+  return decryptedModifiedCasingText
+}
+function decryptFirstChar(encryptedFirstChar: string): string {
+  const regionIndex = REGION_CHARS.indexOf(encryptedFirstChar)
+  const originalFirstChar = REGION_CHARS[REGION_CHARS.length - 1 - regionIndex]
+
+  return originalFirstChar
 }
