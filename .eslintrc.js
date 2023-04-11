@@ -12,7 +12,7 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
-  ignorePatterns: ['test/**/*.spec.ts', 'node_modules/**', './tsconfig.json'],
+  // ignorePatterns: ['test/**/*.spec.ts', 'node_modules/**', './tsconfig.json'],
   // parser: "@typescript-eslint/parser",
   // parserOptions: {
   //   project: "./tsconfig.json",

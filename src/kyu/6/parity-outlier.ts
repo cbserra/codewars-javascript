@@ -1,22 +1,20 @@
-const ODD_OUTLIER = 1;
-const EVEN_OUTLIER = 0;
+const ODD_OUTLIER = 1
+const EVEN_OUTLIER = 0
 
 export function findOutlier(integers: number[]): number {
-  const evenOutliers = integers.filter(isEvenOutlier);
+  const evenOutliers = integers.filter(isEvenOutlier)
 
-  return evenOutliers.length === 1
-    ? evenOutliers[0]
-    : integers.filter(isOddOutlier)[0];
+  return evenOutliers.length === 1 ? evenOutliers[0] : integers.filter(isOddOutlier)[0]
 }
 
 function isEvenOutlier(integer: number): boolean {
-  return doesModMatchResult(integer, EVEN_OUTLIER);
+  return doesModMatchResult(integer, EVEN_OUTLIER)
 }
 
 function isOddOutlier(integer: number): boolean {
-  return doesModMatchResult(integer, ODD_OUTLIER);
+  return doesModMatchResult(integer, ODD_OUTLIER)
 }
 
 function doesModMatchResult(mod: number, result: number): boolean {
-  return Math.abs(mod % 2) === result;
+  return Math.abs(mod % 2) === result
 }

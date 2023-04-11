@@ -1,30 +1,30 @@
 type NumberToString = {
-  [key: number]: string;
-};
+  [key: number]: string
+}
 
 const BASE_10_ROMAN_NUMERAL: NumberToString = {
-  1: "I",
-  5: "V",
-  10: "X",
-  50: "L",
-  100: "C",
-  500: "D",
-  1000: "M",
-};
+  1: 'I',
+  5: 'V',
+  10: 'X',
+  50: 'L',
+  100: 'C',
+  500: 'D',
+  1000: 'M',
+}
 
 export function solution(number: number): string | undefined {
-  console.log(`🚀 ~ solution ~ number`, number);
-  const originalNumber = number;
+  console.log(`🚀 ~ solution ~ number`, number)
+  const originalNumber = number
   // const numberAsString = number.toString()
   // const stringAsArray = numberAsString.split('')
 
-  let mutableInput = number;
-  let result = "";
+  let mutableInput = number
+  let result = ''
   // let remainder = 0
-  const leadingNumber = getLeadingNumber(originalNumber);
-  console.log(`🚀 ~ leadingNumber`, leadingNumber);
-  const remainder = getRemainder(originalNumber, leadingNumber);
-  console.log(`🚀 ~ remainder`, remainder);
+  const leadingNumber = getLeadingNumber(originalNumber)
+  console.log(`🚀 ~ leadingNumber`, leadingNumber)
+  const remainder = getRemainder(originalNumber, leadingNumber)
+  console.log(`🚀 ~ remainder`, remainder)
 
   // if ( mutableInput >= 1000) {
   //   const leadingNum = mutableInput / 1_000
@@ -117,55 +117,52 @@ export function solution(number: number): string | undefined {
   //   return result + solution(remainder)
   // }
 
-  return result;
+  return result
 }
 
 function getRemainder(wholeNumber: number, leadingNumber: number): number {
-  return wholeNumber % leadingNumber;
+  return wholeNumber % leadingNumber
 }
 
 function getLeadingNumber(wholeNumber: number): number {
-  const leadingNumber = getDivisor(wholeNumber);
-  console.log(`🚀 ~ getLeadingNumber ~ leadingNumber`, leadingNumber);
-  return leadingNumber;
+  const leadingNumber = getDivisor(wholeNumber)
+  console.log(`🚀 ~ getLeadingNumber ~ leadingNumber`, leadingNumber)
+  return leadingNumber
 }
 
 function getDivisor(wholeNumber: number): number {
-  let divisor = 0;
+  let divisor = 0
   if (wholeNumber >= 1000) {
-    divisor = 1_000;
-    console.log(`🚀 ~ getDivisor ~ divisor`, divisor);
+    divisor = 1_000
+    console.log(`🚀 ~ getDivisor ~ divisor`, divisor)
   } else if (wholeNumber >= 500) {
-    divisor = 500;
-    console.log(`🚀 ~ getDivisor ~ divisor`, divisor);
+    divisor = 500
+    console.log(`🚀 ~ getDivisor ~ divisor`, divisor)
   } else if (wholeNumber >= 100) {
-    divisor = 100;
-    console.log(`🚀 ~ getDivisor ~ 100`, 100);
+    divisor = 100
+    console.log(`🚀 ~ getDivisor ~ 100`, 100)
   } else if (wholeNumber >= 50) {
-    divisor = 50;
-    console.log(`🚀 ~ getDivisor ~ divisor`, divisor);
+    divisor = 50
+    console.log(`🚀 ~ getDivisor ~ divisor`, divisor)
   } else if (wholeNumber >= 10) {
-    divisor = 10;
-    console.log(`🚀 ~ getDivisor ~ divisor`, divisor);
+    divisor = 10
+    console.log(`🚀 ~ getDivisor ~ divisor`, divisor)
   } else if (wholeNumber >= 5) {
-    divisor = 5;
-    console.log(`🚀 ~ getDivisor ~ divisor`, divisor);
+    divisor = 5
+    console.log(`🚀 ~ getDivisor ~ divisor`, divisor)
   } else if (wholeNumber >= 1) {
-    divisor = 1;
-    console.log(`🚀 ~ getDivisor ~ divisor`, divisor);
+    divisor = 1
+    console.log(`🚀 ~ getDivisor ~ divisor`, divisor)
   }
 
-  return divisor;
+  return divisor
 }
 
 function checkForLessThanPlace(number: number, place: number): string {
   if (number === 4 || number === 9) {
-    return BASE_10_ROMAN_NUMERAL[place] + BASE_10_ROMAN_NUMERAL[place * 10];
+    return BASE_10_ROMAN_NUMERAL[place] + BASE_10_ROMAN_NUMERAL[place * 10]
   } else if (number >= 5) {
-    return (
-      BASE_10_ROMAN_NUMERAL[place * 5] +
-      BASE_10_ROMAN_NUMERAL[place].repeat(number - 5)
-    );
+    return BASE_10_ROMAN_NUMERAL[place * 5] + BASE_10_ROMAN_NUMERAL[place].repeat(number - 5)
   }
-  return BASE_10_ROMAN_NUMERAL[place].repeat(number);
+  return BASE_10_ROMAN_NUMERAL[place].repeat(number)
 }

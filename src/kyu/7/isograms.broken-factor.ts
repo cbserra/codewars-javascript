@@ -1,35 +1,35 @@
 type IsogramCount = {
-  [key: string]: number;
-};
+  [key: string]: number
+}
 
 function hasDuplicates(value: number, index: number, array: string[]): boolean {
-  return new Set(array).size !== array.length;
+  return new Set(array).size !== array.length
 }
 
 export function isIsogram(str: string): boolean {
-  console.log(`🚀 ~ isIsogram ~ str`, str);
+  console.log(`🚀 ~ isIsogram ~ str`, str)
   if (str === undefined || str.length == 0) {
-    return true;
+    return true
   }
 
-  const count: IsogramCount = {};
+  const count: IsogramCount = {}
 
   const foundIsogram = str
     .toLowerCase()
-    .split("")
+    .split('')
     .sort()
     .map((curr, idx, arr) => {
-      count[idx] = count[idx] !== 0 ? count[idx] + 1 : 1;
-      return Object.values(count);
+      count[idx] = count[idx] !== 0 ? count[idx] + 1 : 1
+      return Object.values(count)
     })
     .some((curr, idx, arr) => {
-      console.log(`🚀 ~ arr`, arr);
-      console.log(`🚀 ~ idx`, idx);
-      console.log(`🚀 ~ curr`, curr);
-      console.log(`🚀 ~ arr[${idx - 1}]`, arr[idx - 1]);
+      console.log(`🚀 ~ arr`, arr)
+      console.log(`🚀 ~ idx`, idx)
+      console.log(`🚀 ~ curr`, curr)
+      console.log(`🚀 ~ arr[${idx - 1}]`, arr[idx - 1])
 
-      return !(curr === arr[idx + 1] && idx < arr.length - 1);
-    });
+      return !(curr === arr[idx + 1] && idx < arr.length - 1)
+    })
 
   //   count[curr] = count[curr] ? count[curr] + 1 : 1;
   //   console.log(
@@ -40,7 +40,7 @@ export function isIsogram(str: string): boolean {
   //     foundIsogram = false;
   //   }
   // })
-  console.log(`🚀 ~ foundIsogram`, foundIsogram);
+  console.log(`🚀 ~ foundIsogram`, foundIsogram)
   // .
   // .map((curr, idx, arr) => {
   // .forEach((curr, idx, arr) => {
@@ -54,5 +54,5 @@ export function isIsogram(str: string): boolean {
   //     }
   //   });
 
-  return foundIsogram;
+  return foundIsogram
 }

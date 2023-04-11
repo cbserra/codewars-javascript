@@ -1,7 +1,7 @@
 export function isIsogram(str: string) {
   return !str
     .toLowerCase()
-    .split("")
+    .split('')
     .sort()
-    .some((curr, idx, arr) => curr === arr[idx + 1]);
+    .some((curr, idx, arr) => curr === arr[idx + 1])
 }

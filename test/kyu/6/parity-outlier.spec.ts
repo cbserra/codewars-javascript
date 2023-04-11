@@ -1,11 +1,12 @@
-import { assert } from "chai";
+import { assert } from 'chai'
 
-import { findOutlier } from "../../../src/kyu/6/parity-outlier";
-
-it("Parity Outlier Simple tests", function () {
-  assert.equal(findOutlier([0, 1, 2]), 1);
-  assert.equal(findOutlier([1, 2, 3]), 2);
-  assert.equal(findOutlier([2, 6, 8, 10, 3]), 3);
-  assert.equal(findOutlier([0, 0, 3, 0, 0]), 3);
-  assert.equal(findOutlier([1, 1, 0, 1, 1]), 0);
-});
+import { findOutlier } from '../../../src/kyu/6/parity-outlier'
+describe('parity-outlier tests', function () {
+  it('Simple tests', function () {
+    assert.equal(findOutlier([0, 1, 2]), 1)
+    assert.equal(findOutlier([1, 2, 3]), 2)
+    assert.equal(findOutlier([2, 6, 8, 10, 3]), 3)
+    assert.equal(findOutlier([0, 0, 3, 0, 0]), 3)
+    assert.equal(findOutlier([1, 1, 0, 1, 1]), 0)
+  })
+})
